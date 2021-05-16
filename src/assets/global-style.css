@@ -1,0 +1,81 @@
+.avatar-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+
+.bg-navbar {
+  background-color: #EDEEEE;
+}
+
+.line {
+  border-top: 0.1px solid #DADCE0;
+  margin-left: 5%;
+}
+
+.area-list-chat {
+  height: 89vh;
+}
+
+
+.test {
+  width: 30px;
+}
+
+.chat-room {
+  background-image: url('../assets/image/1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.type-chat-area {
+  bottom: 0;
+  background-color: #EDEEEE;
+}
+
+.btn-send {
+  cursor: pointer;
+}
+
+.btn-send:active {
+  height: 35px;
+  width: 35px;
+}
+
+.chat-area {
+  height: 80vh;
+  overflow: auto;
+}
+
+.chat-bubble {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-right-radius: 15px;
+  word-wrap: break-word;
+  white-space:pre-wrap;
+  max-width: 60%;
+}
+
+.chat-bubble-self {
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-top-left-radius: 15px;
+  word-wrap: break-word;
+  white-space:pre-wrap;
+  max-width: 60%;
+  background-color: #FFFD8D;
+}
+
+.text-small {
+  font-size: 13px;
+}
+
+.bg-yellow {
+  background-color: #A98600;
+}
+
+.card-auth {
+  width: 40%;
+}
