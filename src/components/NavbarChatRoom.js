@@ -1,17 +1,24 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
 
 // <--------- Import Assets --------->
 import avatar from '../assets/image/2.png'
+const { REACT_APP_API_URL: API_URL } = process.env
 
 function NavbarChatRoom() {
+  const chatFocus = useSelector(state => state.chat.chatFocus)
   return (
-    <div className="col-12 py-2 bg-navbar border border-start-2 d-inline-flex">
+    <div className={`col-12 bg-navbar border border-start-2 d-inline-flex ${chatFocus !== null ? 'py-2' : 'py-3'}`}>
+      {
+        chatFocus !== null ?
+        <>
       <div className="col-md-1 col-2">
-        <img src={avatar} alt="avatar" className="avatar-icon me-3" />
+        <img src={chatFocus.photo !== `${API_URL}null` ? chatFocus.photo : avatar} alt="avatar" className="avatar-icon me-3" />
       </div>
       <div className="col-md-11 col-10 d-flex flex-row align-items-center justify-content-between">
         <div>
-          <span className="fw-bold">Jarott</span> <br />
+          <span className="fw-bold">{chatFocus.name}</span> <br />
           <span>online</span>
         </div>
         <div>
@@ -23,6 +30,10 @@ function NavbarChatRoom() {
           </svg>
         </div>
       </div>
+      </>
+      :
+        <h4 className="fw-bold color-yellow">Wellcome to Fast Chat</h4>
+      }
     </div>
   )
 }

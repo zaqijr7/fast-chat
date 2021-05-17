@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage'
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 
 import authReducer from './auth'
+import chatReducer from './chat'
 
 const authConfig = {
   key: 'authReducer',
@@ -13,6 +14,7 @@ const authConfig = {
 
 const reducer = combineReducers({
   auth: persistReducer(authConfig, authReducer),
+  chat: chatReducer,
 })
 
 export default reducer
