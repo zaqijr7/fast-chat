@@ -38,6 +38,14 @@ const initialState = {
           message: action.message
         }
       }
+      case 'LOGOUT': {
+        return {
+          token: null,
+          email: null,
+          user: null,
+          message: null,
+        }
+      }
       default: {
         return {
           ...state

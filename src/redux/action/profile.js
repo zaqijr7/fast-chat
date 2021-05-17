@@ -1,4 +1,3 @@
-import jwt from 'jwt-decode'
 import http from '../../helpers/http'
 
 
@@ -8,7 +7,12 @@ export const updateProfile = (file, name, token) => {
       if (file !== null) {
         const formData = new FormData()
         formData.append('photo', file)
-        await http(token).put('profile', formData)
+        try {
+          const updatePhoto = await http(token).put('profile', formData)
+          console.log(updatePhoto);
+        } catch (err) {
+          console.log(err);
+        }
       }
       const data = new URLSearchParams()
       data.append('name', name)

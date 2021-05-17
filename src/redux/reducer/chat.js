@@ -2,6 +2,8 @@ const initialState = {
   chatFocus: null,
   messageHistory: [],
   historyInteractions: [],
+  expandFindPeople: false,
+  people: []
 }
 
 const charReducer = (state = initialState, action) => {
@@ -22,6 +24,18 @@ const charReducer = (state = initialState, action) => {
       return {
         ...state,
         messageHistory: action.messageHistory,
+      }
+    }
+    case 'EXPAND_FIND_PEOPLE': {
+      return {
+        ...state,
+        expandFindPeople: action.expandFindPeople,
+      }
+    }
+    case 'GET_PEOPLE': {
+      return {
+        ...state,
+        people: action.people,
       }
     }
     default: {

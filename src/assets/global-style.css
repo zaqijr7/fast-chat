@@ -109,6 +109,17 @@
   box-sizing: border-box;
 }
 
+.search-input:h {
+  transition: width 2s;
+}
+
+.navbar-height {
+  height: 74px;
+}
+
+.pointer-cursor {
+  cursor: pointer;
+}
 
 /* device medium */
 @media screen and (min-width: 769px) {
@@ -120,6 +131,6 @@
 /* device xl */
 @media screen and (min-width: 1200px) {
   .area-list-chat {
-    height: 89vh;
+    height: 88.5vh;
   }
 }

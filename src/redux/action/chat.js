@@ -45,6 +45,40 @@ export const chatFocus = (data, token) => {
   }
 }
 
+export const getMessageById = (id, token) => {
+  return async dispatch => {
+    try {
+      const response = await http(token).get(`chat/${id}`)
+      console.log(response);
+      dispatch({
+        type: 'MESSAGE_HISTORY',
+        messageHistory: response.data.result
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
+export const expandFindPeople = (data) => {
+  return async dispatch => {
+    try {
+      dispatch({
+        type: 'EXPAND_FIND_PEOPLE',
+        expandFindPeople: !data,
+      })
+      const response = await http().get(`allUser`)
+      console.log(response);
+      dispatch({
+        type: 'GET_PEOPLE',
+        people: response.data.results
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
 export const sendMessage = (message, receipent, token) => {
   return async dispatch => {
     try {
@@ -55,6 +89,20 @@ export const sendMessage = (message, receipent, token) => {
       dispatch({
         type: 'MESSAGE_HISTORY',
         messageHistory: getChat.data.result
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
+export const searchPeople = (data) => {
+  return async dispatch => {
+    try {
+      const response = await http().get(`allUser?search=${data}`)
+      dispatch({
+        type: 'GET_PEOPLE',
+        people: response.data.results
       })
     } catch (err) {
       console.log(err);

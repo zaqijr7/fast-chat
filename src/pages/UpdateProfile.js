@@ -20,15 +20,18 @@ function UpdateProfile() {
   const dispatch = useDispatch()
   const history = useHistory()
 
-  const handleClick = () => {
-    dispatch(updateProfile(file, name, token))
-    history.push({
-      pathname: '/'
-    });
+  const handleClick = async () => {
+    try {
+      await dispatch(updateProfile(file, name, token))
+      history.push({
+        pathname: '/'
+      });
+    } catch (err) {
+      console.log(err);
+    } 
   }
 
   useEffect(() => {
-
     return () => {
       dispatch(cleanMessage())
     }
@@ -48,7 +51,7 @@ function UpdateProfile() {
             <img src={fileUrl} alt="update" className="photo-input" />
             <input className="input-photo" type="file" name="photo" onChange={(event) => setFile(event.target.files[0])} />
           </div>
-          <p>Choose your photo</p>
+          <p>Choose your photo, Max size 50Kb</p>
           <div className="input-group mb-3 position-relative justify-content-end align-items-center">
             <input type="text" className="form-control py-2" placeholder="Input your name" aria-label="Username" aria-describedby="basic-addon1" onChange={(e) => setName(e.target.value)} />
             <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" className="bi bi-person me-3 text-muted position-absolute" viewBox="0 0 16 16">

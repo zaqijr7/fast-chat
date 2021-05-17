@@ -33,7 +33,7 @@ function ChatRoom() {
         <div className="row">
           <NavbarChatRoom />
         </div>
-        <div className="row chat-area pb-4">
+        <div className="row chat-area pb-5">
             <div className="col-12 px-4">
               {chatHistory.messageHistory.length > 0 && (
                 chatHistory.messageHistory.map((item, index) => {

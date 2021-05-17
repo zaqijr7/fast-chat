@@ -11,24 +11,21 @@ function Pin() {
   const data = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const history = useHistory()
-  const handleClick = () => {
-    dispatch(login(data.email, pin))
-    history.push({
-      pathname: '/update-profile'
-    });
+  const handleClick = async () => {
+    try {
+      await dispatch(login(data.email, pin))
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
-    if (token && history.location.state) {
-      return history.push({
-        pathname: `${history.location.state.from.pathname}` || '/'
-      });
-    } else if (token) {
-      return history.push({
-        pathname: '/'
+    if (token !== null) {
+      history.push({
+        pathname: '/update-profile'
       });
     }
-  })
+  }, [token])
   return (
     <ContainerAuth>
       <div className="card card-auth">

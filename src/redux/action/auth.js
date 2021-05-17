@@ -1,5 +1,4 @@
 import http from '../../helpers/http'
-import jwt from 'jwt-decode'
 
 export const sendMail = (email) => {
   return async dispatch => {
@@ -45,6 +44,14 @@ export const cleanMessage = () => {
   return async dispatch => {
     dispatch({
       type: 'CLEAN_MESSAGE'
+    })
+  }
+}
+
+export const logout = () => {
+  return async dispatch => {
+    dispatch({
+      type: 'LOGOUT',
     })
   }
 }

@@ -9,7 +9,8 @@ import ChatBubble from '../components/ChatBubble'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import FindPeople from '../components/FindPeople'
-import { chatFocus, historyInteractions, sendMessage } from '../redux/action/chat'
+import { chatFocus, expandFindPeople, historyInteractions, sendMessage } from '../redux/action/chat'
+import ListPeople from '../components/ListPeople'
 
 function Home() {
   const [width, setWidth] = useState(1200)
@@ -17,6 +18,7 @@ function Home() {
   const messagesEndRef = useRef(null)
   const chatHistory = useSelector(state => state.chat)
   const chatFocusId = useSelector(state => state.chat.chatFocus)
+  const expandFind = useSelector(state => state.chat.expandFindPeople)
   const user = useSelector(state => state.auth.user)
   const token = useSelector(state => state.auth.token)
   const dispatch = useDispatch()
@@ -32,7 +34,7 @@ function Home() {
   }, [])
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "start", })
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "start", })
   }
 
   useEffect(() => {
@@ -57,6 +59,16 @@ function Home() {
     }
   }
 
+  const handleClickFindPeople = (value) => {
+    dispatch(expandFindPeople(expandFind))
+    const data = {
+      id: value.id_user,
+      name: value.name,
+      photo: value.photo
+    }
+    dispatch(chatFocus(data, token))
+  }
+
   const sendChat = () => {
     dispatch(sendMessage(textChat, chatFocusId.id, token))
     dispatch(historyInteractions(token))
@@ -72,25 +84,45 @@ function Home() {
             <NavberLeft />
           </div>
           <div className="overflow-auto area-list-chat">
-            {chatHistory.historyInteractions.length !== 0 ?
-              chatHistory.historyInteractions.map((item, index) => {
-                return (
-                  <Link to="/chat/1" className="text-decoration-none" onClick={() => handleChatFocus(item)}>
-                    <ListChat
-                      index={index}
-                      sender={item.senderId}
-                      senderName={item.senderName}
-                      senderPhoto={item.senderPhoto}
-                      receipent={item.receipentId}
-                      receipentName={item.receipentName}
-                      receipentPhoto={item.receipentPhoto}
-                      message={item.message}
-                      createdAt={item.createdAt} />
-                  </Link>
-                )
-              })
-              :
-              <FindPeople />
+            {
+              expandFind === true ?
+                <>
+                  {chatHistory.people.length !== 0 && (
+                    chatHistory.people.map((item, index) => {
+                      if (item.id_user !== user.id_user) {
+                        return (
+                          <Link to={`/chat/${item.senderId}`} className="text-decoration-none bg-dark" onClick={() => handleClickFindPeople(item)}>
+                            <ListPeople name={item.name} photo={item.photo} />
+                          </Link>
+                        )
+                      }
+                    })
+                  )
+                  }
+                </>
+                :
+                <>
+                  {chatHistory.historyInteractions.length !== 0 ?
+                    chatHistory.historyInteractions.map((item, index) => {
+                      return (
+                        <Link to={`/chat/${item.senderId}`} className="text-decoration-none" onClick={() => handleChatFocus(item)}>
+                          <ListChat
+                            index={index}
+                            sender={item.senderId}
+                            senderName={item.senderName}
+                            senderPhoto={item.senderPhoto}
+                            receipent={item.receipentId}
+                            receipentName={item.receipentName}
+                            receipentPhoto={item.receipentPhoto}
+                            message={item.message}
+                            createdAt={item.createdAt} />
+                        </Link>
+                      )
+                    })
+                    :
+                    <FindPeople />
+                  }
+                </>
             }
           </div>
         </div>
@@ -104,26 +136,47 @@ function Home() {
             <NavberLeft />
           </div>
           <div className="overflow-auto area-list-chat">
-            {chatHistory.historyInteractions.length !== 0 ?
-              chatHistory.historyInteractions.map((item, index) => {
-                return (
-                  <Link className="text-decoration-none bg-dark" onClick={() => handleChatFocus(item)}>
-                    <ListChat
-                      index={index}
-                      sender={item.senderId}
-                      senderName={item.senderName}
-                      senderPhoto={item.senderPhoto}
-                      receipent={item.receipentId}
-                      receipentName={item.receipentName}
-                      receipentPhoto={item.receipentPhoto}
-                      message={item.message}
-                      createdAt={item.createdAt} />
-                  </Link>
-                )
-              })
-              :
-              <FindPeople />
+            {
+              expandFind === true ?
+                <>
+                  {chatHistory.people.length !== 0 && (
+                    chatHistory.people.map((item, index) => {
+                      if (item.id_user !== user.id_user) {
+                        return (
+                          <Link className="text-decoration-none bg-dark" onClick={() => handleClickFindPeople(item)}>
+                            <ListPeople name={item.name} photo={item.photo} />
+                          </Link>
+                        )
+                      }
+                    })
+                  )
+                  }
+                </>
+                :
+                <>
+                  {chatHistory.historyInteractions.length !== 0 ?
+                    chatHistory.historyInteractions.map((item, index) => {
+                      return (
+                        <Link className="text-decoration-none bg-dark" onClick={() => handleChatFocus(item)}>
+                          <ListChat
+                            index={index}
+                            sender={item.senderId}
+                            senderName={item.senderName}
+                            senderPhoto={item.senderPhoto}
+                            receipent={item.receipentId}
+                            receipentName={item.receipentName}
+                            receipentPhoto={item.receipentPhoto}
+                            message={item.message}
+                            createdAt={item.createdAt} />
+                        </Link>
+                      )
+                    })
+                    :
+                    <FindPeople />
+                  }
+                </>
             }
+
           </div>
         </div>
         <div className="d-none d-xl-block col-xl-8 chat-room position-relative mx-0">
@@ -137,17 +190,17 @@ function Home() {
                   return (
                     <div className="row">
                       <ChatBubble
-                      index={index}
-                      message={item.message}
-                      sender={item.senderId}
-                      receipent={item.receipentId}
-                      time={item.createdAt} />
+                        index={index}
+                        message={item.message}
+                        sender={item.senderId}
+                        receipent={item.receipentId}
+                        time={item.createdAt} />
                     </div>
                   )
                 })
               )
               }
-              <div ref={messagesEndRef}/>
+              <div ref={messagesEndRef} />
             </div>
           </div>
           <div className="row">

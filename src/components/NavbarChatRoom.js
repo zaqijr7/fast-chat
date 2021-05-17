@@ -9,7 +9,7 @@ const { REACT_APP_API_URL: API_URL } = process.env
 function NavbarChatRoom() {
   const chatFocus = useSelector(state => state.chat.chatFocus)
   return (
-    <div className={`col-12 bg-navbar border border-start-2 d-inline-flex ${chatFocus !== null ? 'py-2' : 'py-3'}`}>
+    <div className={`col-12 bg-navbar border border-start-2 d-inline-flex navbar-height align-items-center`}>
       {
         chatFocus !== null ?
         <>
