@@ -2,14 +2,14 @@ import http from '../../helpers/http'
 
 export const sendMail = (email) => {
   return async dispatch => {
-    const params = new URLSearchParams()
-    params.append('email', email)
     try {
-      await http().post('auth', params)
       dispatch({
         type: 'SEND_MAIL',
         email: email,
       })
+      const params = new URLSearchParams()
+      params.append('email', email)
+      await http().post('auth', params)
     } catch (err) {
       const { message } = err.response.data
       console.log(message);

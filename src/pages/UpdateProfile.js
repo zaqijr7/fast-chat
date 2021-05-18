@@ -24,7 +24,7 @@ function UpdateProfile() {
     try {
       await dispatch(updateProfile(file, name, token))
       history.push({
-        pathname: '/'
+        pathname: '/fast-chat'
       });
     } catch (err) {
       console.log(err);
