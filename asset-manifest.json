@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/fast-chat/static/css/main.c295056c.chunk.css",
+    "main.js": "/fast-chat/static/js/main.6b7f37c3.chunk.js",
+    "main.js.map": "/fast-chat/static/js/main.6b7f37c3.chunk.js.map",
+    "runtime-main.js": "/fast-chat/static/js/runtime-main.cb959abd.js",
+    "runtime-main.js.map": "/fast-chat/static/js/runtime-main.cb959abd.js.map",
+    "static/css/2.65af8127.chunk.css": "/fast-chat/static/css/2.65af8127.chunk.css",
+    "static/js/2.297770f5.chunk.js": "/fast-chat/static/js/2.297770f5.chunk.js",
+    "static/js/2.297770f5.chunk.js.map": "/fast-chat/static/js/2.297770f5.chunk.js.map",
+    "static/js/3.025a8eb1.chunk.js": "/fast-chat/static/js/3.025a8eb1.chunk.js",
+    "static/js/3.025a8eb1.chunk.js.map": "/fast-chat/static/js/3.025a8eb1.chunk.js.map",
+    "index.html": "/fast-chat/index.html",
+    "static/css/2.65af8127.chunk.css.map": "/fast-chat/static/css/2.65af8127.chunk.css.map",
+    "static/css/main.c295056c.chunk.css.map": "/fast-chat/static/css/main.c295056c.chunk.css.map",
+    "static/js/2.297770f5.chunk.js.LICENSE.txt": "/fast-chat/static/js/2.297770f5.chunk.js.LICENSE.txt",
+    "static/media/global-style.css": "/fast-chat/static/media/1.27e30b67.jpg",
+    "static/media/avatar.e5117e8e.png": "/fast-chat/static/media/avatar.e5117e8e.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cb959abd.js",
+    "static/css/2.65af8127.chunk.css",
+    "static/js/2.297770f5.chunk.js",
+    "static/css/main.c295056c.chunk.css",
+    "static/js/main.6b7f37c3.chunk.js"
+  ]
+}
