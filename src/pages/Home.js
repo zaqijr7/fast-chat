@@ -34,7 +34,7 @@ function Home() {
   }, [])
 
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "start", })
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "start", })
   }
 
   useEffect(() => {
