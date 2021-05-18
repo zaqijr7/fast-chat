@@ -25,7 +25,7 @@ function UpdateProfile() {
       await dispatch(updateProfile(file, name, token))
       history.push({
         pathname: '/'
-      });
+      }); 
     } catch (err) {
       console.log(err);
     } 
